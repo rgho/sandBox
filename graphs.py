@@ -62,22 +62,43 @@ def find_path(destination,graph,current_path,already_visited):
 #print find_path(10,adjacencies,[1],[1])
 
 
+def reconstuct_path():
+
 
 
 def find_shortest_path_breadth(start, desitnation, graph):
 	#init
 	nearby_nodes = [start]
-	paths_for_existing_nodes = []
+	paths_for_existing_nodes = [[start]]
 	current = start
+	index = 0
+
 
 	while True:
-		## HAPPENS MANY TIMES
-		nodes = nodesOf[current]
-		if destination in nodes:
-			#shortest found
-			return paths_for_existing_nodes[thisNode] + destination
+		## HAPPENS MANY TIMESs
+		visited = []
+		visited.append(current)
+		nodes = graph[current] #GET ADJASCENT POINT
+		nodes = untraversed_nodes = diff(nodes,visited) # GET ADJASCENT NOT ALREADY VISITED
+	
+		new_list = []
+		for node in nodes:
+			if node == destination:
+				print "Found!"
+			else:
+				visited.append(node)
+				new_nodes = untraversed_nodes = diff(graph[nodes],visited) 
+				new_list.append( graph[node] )
+
+
+
+
+
+
+
+		
 		else:
-			untraversed_nodes = diff(nodes,visited)
+			
 			# add to end
 			nearby_nodes.append(untraversed_nodes)
 			paths_for_existing_nodes.append(path_till_now + untraversed_nodes)
