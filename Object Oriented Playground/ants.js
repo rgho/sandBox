@@ -54,9 +54,38 @@ Grid.prototype.each = function(actionFunc){
 	};
 };
 
+/*
 var testGrid = new Grid(3, 2);
 testGrid.setValueAt(new Point(1, 0), "#");
 testGrid.setValueAt(new Point(1, 1), "o");
 testGrid.each(function(point, value) {
   console.log(point.x, ",", point.y, ": ", value);
 });
+*/
+
+// DEFINE A DIRECTIONS DICT FOR RELATONS TO NEARBY CELLS
+var directions = new Dictionary(
+	{
+		"n": new Point(0,-1),
+		"ne": new Point(1,-1),
+		"e": new Point(1,0),
+		"se": new Point(1,1),
+		"s": new Point(0,1),
+		"sw": new Point(-1,1),
+		"w": new Point(-1,0),
+		"nw": new Point(-1,-1)
+	});
+
+console.log(new Point(4, 4).add(directions.lookup("se")));
+
+var wall = {};
+
+var Terrarium = function(plan){
+	var grid = new Grid(plan[0].length, plan.length);
+	for (var y = 0; y < plan.length; y++) {
+		line = plan[y];
+		for (var x = 0; x < plan[0].length; x++) {
+			grid.setValueAt(new Point(x,y), elementFromChar(line.charAt(x)))
+		};
+	};
+}
