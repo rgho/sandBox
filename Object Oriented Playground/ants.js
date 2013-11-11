@@ -46,11 +46,17 @@ Grid.prototype.moveValue = function(from, to){
 };
 
 Grid.prototype.each = function(actionFunc){
-	for (var h = 0; w < this.height; h++) {
-		for (var w = 0; w < this.width; w++) {
-			thisPoint = {x:w,y:h}; // CONSTRUCT A POINT OBJ
+	for (var y = 0; y < this.height; y++) {
+		for (var x = 0; x < this.width; x++) {
+			var thisPoint = new Point(x,y); // CONSTRUCT A POINT OBJ
 			actionFunc(thisPoint, this.valueAt(thisPoint));
 		};
 	};
-}:
+};
 
+var testGrid = new Grid(3, 2);
+testGrid.setValueAt(new Point(1, 0), "#");
+testGrid.setValueAt(new Point(1, 1), "o");
+testGrid.each(function(point, value) {
+  console.log(point.x, ",", point.y, ": ", value);
+});
