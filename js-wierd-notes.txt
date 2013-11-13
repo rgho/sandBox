@@ -1,0 +1,12 @@
+JS Weird
+
+The names of the arguments of a function are available as variables inside it. They will refer to the values of the arguments the function is being called with, and like normal variables created inside a function, they do not exist outside it. Aside from the top-level environment, there are smaller, local environments created by function calls. When looking up a variable inside a function, the local environment is checked first, and only if the variable does not exist there is it looked up in the top-level environment
+
+closures!
+lexical scoping
+
+can return functions!
+
+
+javascript reffering to elements has to be after the elements are laid out on the html itself??
+

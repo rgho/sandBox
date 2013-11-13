@@ -1,6 +1,3 @@
-import pdb
-
-
 # STORE THE GRAPH
 adjacencies = dict()
 adjacencies[1] = [2,4]
@@ -35,16 +32,8 @@ adjacencies2[14] = [13,8]
 adjacencies2[15] = [16]
 adjacencies2[16] = [15]
 
-
-def remove_matching_items(target_list,match_elements):
-	for item in target_list:
-		if item in match_elements:
-			target_list.remove(item)
-	return target_list
-#if dead end try aniother, add to visited lis 
-
-
 def find_path(destination,graph,current_path,already_visited):
+	# depth first.
 	# WE CONTINUE LOOPING WHILE WE HAVE NOT REACHED DEST OR WHILE PATH IS NOT EMPTY
 	while (current_path[-1] != destination and len(current_path)!=0):
 		
@@ -84,7 +73,6 @@ def find_path(destination,graph,current_path,already_visited):
 
 def connected_to(node,graph):
 	return graph[node]
-
 
 def graph_breadth_search(start,destination,graph):
 	# some inits
@@ -126,15 +114,6 @@ def graph_breadth_search(start,destination,graph):
 	#if we have exited the while loop then no connections were found!
 	return "no connection found."
 print graph_breadth_search(1,12,adjacencies2)
-
-'''
-current_path = [1]
-temp = current_path
-current_path.append(2)
-temp.append(3)
-print current_path
-'''
-
 
 
 
