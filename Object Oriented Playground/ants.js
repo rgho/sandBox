@@ -64,7 +64,9 @@ testGrid.each(function(point, value) {
 */
 
 // DEFINE A DIRECTIONS DICT FOR RELATONS TO NEARBY CELLS
-var directions = new Dictionary(
+
+
+var Directions = new Dictionary(
 	{
 		"n": new Point(0,-1),
 		"ne": new Point(1,-1),
@@ -88,4 +90,15 @@ var Terrarium = function(plan){
 			grid.setValueAt(new Point(x,y), elementFromChar(line.charAt(x)))
 		};
 	};
+	this.grid = grid
 }
+
+function elementFromCharacter(character) {
+  if (character == " ")
+    return undefined;
+  else if (character == "#")
+    return wall;
+  else if (character == "o")
+    return new StupidBug();
+}
+
