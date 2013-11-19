@@ -1,3 +1,5 @@
+from random import randint
+
 # STORE THE GRAPH
 adjacencies = dict()
 adjacencies[1] = [2,4]
@@ -32,7 +34,36 @@ adjacencies2[14] = [13,8]
 adjacencies2[15] = [16]
 adjacencies2[16] = [15]
 
-def find_path(destination,graph,current_path,already_visited):
+
+def file_contents(filename):
+    txt = open(filename)
+    text = txt.read()
+    txt.close()
+    print "DONE READING"
+    return text
+
+def get_adjacencies_from_file(filename):
+	graph = file_contents(filename)
+	graph = graph.splitlines() # split by the lines of file.
+	print "DONE SPLITTING INTO LINES"
+	adjacencies = dict()
+	for edge in graph:
+		nodes = edge.split(' ',1)
+		# PLACE NODES IN ADJENCIES LIST
+		#handle each node in a if statement
+		if nodes[0] in adjacencies:
+			adjacencies[nodes[0]].append(nodes[1])
+		else:
+			adjacencies[nodes[0]] = [nodes[1]]
+		if nodes[1] in adjacencies:
+			adjacencies[nodes[1]].append(nodes[0])
+		else:
+			adjacencies[nodes[1]] = [nodes[0]]
+	print "DONE AND BULIDING ADJENCIES DICT"
+	return adjacencies
+
+
+def graph_depth_search(destination,graph,current_path,already_visited):
 	# depth first.
 	# WE CONTINUE LOOPING WHILE WE HAVE NOT REACHED DEST OR WHILE PATH IS NOT EMPTY
 	while (current_path[-1] != destination and len(current_path)!=0):
@@ -70,7 +101,6 @@ def find_path(destination,graph,current_path,already_visited):
 	return current_path
 #print find_path(10,adjacencies,[1],[1])
 
-
 def connected_to(node,graph):
 	return graph[node]
 
@@ -105,7 +135,7 @@ def graph_breadth_search(start,destination,graph):
 				temp = list(current_path) # this is a critical line. 
 				#something like temp = current_path does not actualy copy the list and cuases toruble.
 				temp.append(node)
-				path_list.append(temp)
+				path_list.append(current_path+[node])
 
 		#remove the current node (first item) from the current 
 		#nodes, making current nodes act like a queue.
@@ -113,32 +143,44 @@ def graph_breadth_search(start,destination,graph):
 		path_list = path_list[1:]
 	#if we have exited the while loop then no connections were found!
 	return "no connection found."
-print graph_breadth_search(1,12,adjacencies2)
+
+#print graph_breadth_search('1','7777',get_adjacencies_from_file("big_graph.txt"))
+
+
+def generate_2d_graph(height, width, num_nodes, connectedness_percent):
+	nodes = []
+	for node_num in range(num_nodes):
+		x = randint(0,width)
+		y = randint(0,height)
+		nodes.append((x,y))
+
+		num_connections = int((connectedness_percent/100.0) * randint(0,30))
+		
+
+
+		
+	# adjacencies = dict()
+	# for edge in graph:
+	# 	nodes = edge.split(' ',1)
+	# 	# PLACE NODES IN ADJENCIES LIST
+	# 	#handle each node in a if statement
+	# 	if nodes[0] in adjacencies:
+	# 		adjacencies[nodes[0]].append(nodes[1])
+	# 	else:
+	# 		adjacencies[nodes[0]] = [nodes[1]]
+	# 	if nodes[1] in adjacencies:
+	# 		adjacencies[nodes[1]].append(nodes[0])
+	# 	else:
+	# 		adjacencies[nodes[1]] = [nodes[0]]
+
+
+	print nodes
+
+	for node_num in range(num_nodes):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+generate_2d_graph(30,30,10)
 
 
 
